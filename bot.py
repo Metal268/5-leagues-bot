@@ -103,3 +103,16 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# Для Render
+import os
+port = int(os.environ.get("PORT", 5000))
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+import threading
+
+def run_server():
+    server = HTTPServer(('', port), SimpleHTTPRequestHandler)
+    server.serve_forever()
+
+# Запускаємо сервер у фоні
+threading.Thread(target=run_server, daemon=True).start()
