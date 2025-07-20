@@ -5,7 +5,7 @@ from datetime import datetime
 import re
 import json
 # from bs4 import BeautifulSoup  # Поки відключено
-import feedparser
+# import feedparser  # Поки відключено
 
 TELEGRAM_TOKEN = "7908433957:AAEyetZTWACBNn6t-wHPQwB89p1PtkQEvfg"
 CHANNEL_ID = "@fiveleaguesua"
@@ -250,8 +250,8 @@ def get_football_news():
     """Збираємо новини з усіх джерел"""
     all_articles = []
     
-    print("🔍 Збираємо новини з Google News...")
-    all_articles.extend(get_google_news())
+    # print("🔍 Збираємо новини з Google News...")
+    # all_articles.extend(get_google_news())  # Поки відключено
     
     # print("🔍 Парсимо Sky Sports...")
     # all_articles.extend(scrape_sky_sports())  # Поки відключено
