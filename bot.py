@@ -4,7 +4,7 @@ import time
 from datetime import datetime
 import re
 import json
-from bs4 import BeautifulSoup
+# from bs4 import BeautifulSoup  # Поки відключено
 import feedparser
 
 TELEGRAM_TOKEN = "7908433957:AAEyetZTWACBNn6t-wHPQwB89p1PtkQEvfg"
@@ -253,8 +253,8 @@ def get_football_news():
     print("🔍 Збираємо новини з Google News...")
     all_articles.extend(get_google_news())
     
-    print("🔍 Парсимо Sky Sports...")
-    all_articles.extend(scrape_sky_sports())
+    # print("🔍 Парсимо Sky Sports...")
+    # all_articles.extend(scrape_sky_sports())  # Поки відключено
     
     # Якщо реальних новин немає, додаємо тестові
     if not all_articles:
