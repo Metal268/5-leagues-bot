@@ -337,8 +337,7 @@ def format_post(title, description, source="Football News"):
             "👀 Слідкуємо за розвитком."    
 
     # Формуємо пост
-    post = f"<b>{headline}</b>\\n\\n"
-
+    post = f"<b>{headline}</b>\n\n"
 
 "
     post += f"{short_desc}
