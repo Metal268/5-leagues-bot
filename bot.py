@@ -12,7 +12,7 @@ import random
 # Токени та налаштування
 TELEGRAM_TOKEN = "7908433957:AAEyetZTWACBNn6t-wHPQwB89p1PtkQEvfg"
 CHANNEL_ID = "@fiveleaguesua"
-ADMIN_CHAT_ID = "YOUR_ADMIN_CHAT_ID"  # Замініть на ваш chat_id для погодження
+ADMIN_CHAT_ID = "8142520596"  # Замініть на ваш chat_id для погодження
 
 # Словник клубів
 CLUBS = {
