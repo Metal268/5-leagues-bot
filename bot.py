@@ -302,42 +302,51 @@ def get_football_news():
     return []
 
 def format_post(title, description, source="Football News"):
-    """Покращений формат поста"""
+    """Формуємо емоційний пост у стилі 'Спортс'"""
+    post_type = determine_post_type(title, description)
+
+    emoji_map = {
+        "transfer": "💰",
+        "injury": "🏥", 
+        "manager": "👔",
+        "performance": "⚽",
+        "general": "📰"
+    }
+    emoji = emoji_map.get(post_type, "📰")
+
+    # Переклад
     title_ua = translate_text(title)
+    desc_ua = translate_text(description) if description else ""
+
+    # Виділення клубу
     club = get_club_name(title + " " + description)
-    
-    # Визначаємо емодзі
-    text = (title + " " + description).lower()
-    if any(word in text for word in ["transfer", "signing", "deal", "million"]):
-        main_emoji = "💰"
-    elif any(word in text for word in ["injury", "ruled out", "injured"]):
-        main_emoji = "🏥"
-    elif any(word in text for word in ["sacked", "fired", "appointed"]):
-        main_emoji = "👔"
-    else:
-        main_emoji = "⚽"
-    
-    # Початок поста
-    if club:
-        post = f"{main_emoji} {club}\n\n"
-    else:
-        post = f"{main_emoji} <b>Football News</b>\n\n"
-    
-    post += f"<b>{title_ua}</b>\n\n"
-    
-    # Опис
-    if description and len(description) > 50:
-        description = re.sub('<.*?>', '', description)
-        description = re.sub(r'\s+', ' ', description).strip()
-        
-        if len(description) > 250:
-            description = description[:250] + "..."
-            
-        description_ua = translate_text(description)
-        post += f"{description_ua}\n\n"
-    
-    post += f"📰 <i>{source}</i>"
-    
+    club_str = f"{club} " if club else ""
+
+    # Заголовок
+    headline = f"{emoji} {club_str}{title_ua.strip()}".strip()
+
+    # Основний текст — коротко, по ділу, емоційно
+    short_desc = desc_ua.strip()
+    if len(short_desc) > 300:
+        short_desc = short_desc[:300] + "…"
+
+    # Фіналка
+    punch = "🔥 Увімкнув режим бомбардира!" if post_type == "performance" else \
+            "💥 Це може змінити хід сезону." if post_type == "transfer" else \
+            "🤕 Втратили ключового гравця." if post_type == "injury" else \
+            "👀 Слідкуємо за розвитком."    
+
+    # Формуємо пост
+    post = f"<b>{headline}</b>
+
+"
+    post += f"{short_desc}
+
+"
+    post += f"{punch}
+"
+    post += f"📰 Джерело: <i>{source}</i>"
+
     return post
 
 def send_message(text, chat_id=CHANNEL_ID, reply_markup=None):
